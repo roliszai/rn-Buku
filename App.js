@@ -11,6 +11,10 @@ import {SafeAreaView} from 'react-native';
 import {AppStatusBar} from './src/Components';
 import RootNavigator from './src/Navigations/RootNavigator';
 import {COLORS} from './src/Themes';
+import {Provider as StoreProvider} from 'react-redux';
+import {getStore} from './src/Redux/Store';
+
+const store  = getStore();
 
 const App: () => React$Node = () => {
   const APP_THEME = COLORS.BLACK;
@@ -18,7 +22,9 @@ const App: () => React$Node = () => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: APP_THEME}}>
       <AppStatusBar backgroundColor={APP_THEME} barStyle="light-content" />
+      <StoreProvider store={store}>
       <RootNavigator />
+      </StoreProvider>
     </SafeAreaView>
   );
 };
